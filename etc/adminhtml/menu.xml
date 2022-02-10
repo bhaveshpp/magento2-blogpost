@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<config xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation = "urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add 
+            id = "Bhaveshpp_Blogpost::title" 
+            title = "Blogpost" 
+            translate="title"
+            module = "Bhaveshpp_Blogpost" 
+            sortOrder = "10" 
+            resource = "Bhaveshpp_Blogpost::title" 
+            parent = "Magento_Backend::content"
+        />
+        <add 
+            id = "Bhaveshpp_Blogpost::author" 
+            title = "Author" 
+            translate="title"
+            module = "Bhaveshpp_Blogpost" 
+            sortOrder = "10" 
+            action = "blogpost/author/index" 
+            resource = "Bhaveshpp_Blogpost::author" 
+            parent = "Bhaveshpp_Blogpost::title"
+        />
+        <add 
+            id = "Bhaveshpp_Blogpost::category" 
+            title = "Category" 
+            translate="title"
+            module = "Bhaveshpp_Blogpost" 
+            sortOrder = "10" 
+            action = "blogpost/category/index" 
+            resource = "Bhaveshpp_Blogpost::category" 
+            parent = "Bhaveshpp_Blogpost::title"
+        />
+        <add 
+            id = "Bhaveshpp_Blogpost::post" 
+            title = "Post" 
+            translate="title"
+            module = "Bhaveshpp_Blogpost" 
+            sortOrder = "10" 
+            action = "blogpost/post/index" 
+            resource = "Bhaveshpp_Blogpost::post" 
+            parent = "Bhaveshpp_Blogpost::title"
+        />
+    </menu>
+</config>
