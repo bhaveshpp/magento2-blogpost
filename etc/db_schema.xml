@@ -1,9 +1,25 @@
 <?xml version="1.0"?>
+<!-- /**
+ * Bhaveshpp 
+ *
+ * This code is developed by Bhavesh Prajapati
+ *
+ * Do not edit or add to this file, a composer will
+ * revert changes while upgrading.
+ * 
+ * if you need new features or found any bug
+ * you can suggest us here.
+ * https://github.com/bhaveshpp/magento2-blogpost/issues
+ *
+ * @category Magento2
+ * @package  Bhaveshpp_Blogpost
+ * @author Bhavesh Prajapati <bhaveshp.magento@gmail.com>
+ * @license  https://bhaveshpp.github.io/LICENSE.txt
+ */ -->
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
     <table name="blogpost_author" resource="default" engine="innodb" comment="Blogpost Author Table">
-        <column xsi:type="smallint" name="author_id" unsigned="false" nullable="false" identity="true"
-                comment="Author Entity ID"/>
+        <column xsi:type="smallint" name="author_id" unsigned="false" nullable="false" identity="true" comment="Author Entity ID"/>
         <column xsi:type="varchar" name="name" nullable="true" length="255" comment="Author full name"/>
         <column xsi:type="varchar" name="sort_name" nullable="true" length="255" comment="Author sort name"/>
         <column xsi:type="varchar" name="email" nullable="true" length="255" comment="Auther Email"/>
@@ -31,38 +47,33 @@
         </index>
     </table>
     <table name="blogpost_post" resource="default" engine="innodb" comment="CMS Page Table">
-        <column xsi:type="smallint" name="post_id" unsigned="false" nullable="false" identity="true"
-                comment="Post Entity ID"/>
+        <column xsi:type="smallint" name="post_id" unsigned="false" nullable="false" identity="true" comment="Post Entity ID"/>
+        <column xsi:type="varchar" name="uri" nullable="true" length="100" comment="Blog Page Uri Identifier"/>
+        <column xsi:type="smallint" name="is_active" unsigned="false" nullable="false" identity="false" default="1" comment="Is Page Active"/>
         <column xsi:type="varchar" name="title" nullable="true" length="255" comment="Post Title"/>
-        <column xsi:type="smallint" name="author" unsigned="false" nullable="true" identity="false" comment="Post Author"/>
+        <column xsi:type="smallint" name="author_id" unsigned="false" nullable="true" identity="false" comment="Post Author Id"/>
         <column xsi:type="varchar" name="category_ids" nullable="true" length="255"  comment="Post Category Ids"/>
-        <column xsi:type="text" name="sort_description" nullable="true" comment="Post Sort Descripion"/>
+        <column xsi:type="text" name="tags" nullable="true" comment="Post hastag"/>
         <column xsi:type="text" name="content" nullable="true" comment="Page Content"/>
-        <column xsi:type="varchar" name="image" nullable="true" length="255" comment="Blog Page Small image"/>
+        <column xsi:type="text" name="sort_description" nullable="true" comment="Post Sort Descripion"/>
+        <column xsi:type="varchar" name="list_view_image" nullable="true" length="255" comment="Blog Page Small image"/>
         <column xsi:type="varchar" name="banner" nullable="true" length="255" comment="Blog Page Banner image"/>
         <column xsi:type="varchar" name="page_layout" nullable="true" length="255" comment="Blog Page Layout"/>
-        <column xsi:type="text" name="tags" nullable="true" comment="Post hastag"/>
+        <column xsi:type="smallint" name="sort_order" unsigned="false" nullable="false" identity="false" default="0" comment="Page Sort Order"/>
         <column xsi:type="varchar" name="meta_title" nullable="true" length="255" comment="Blog Page Meta Title"/>
         <column xsi:type="text" name="meta_keywords" nullable="true" comment="Blog Page Meta Keywords"/>
         <column xsi:type="text" name="meta_description" nullable="true" comment="Blog Page Meta Description"/>
-        <column xsi:type="varchar" name="identifier" nullable="true" length="100" comment="Blog Page String Identifier"/>
-        <column xsi:type="timestamp" name="creation_time" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
-                comment="Page Creation Time"/>
-        <column xsi:type="timestamp" name="update_time" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
-                comment="Page Modification Time"/>
-        <column xsi:type="smallint" name="is_active" unsigned="false" nullable="false" identity="false" default="1" comment="Is Page Active"/>
-        <column xsi:type="smallint" name="sort_order" unsigned="false" nullable="false" identity="false" default="0" comment="Page Sort Order"/>
+        <column xsi:type="timestamp" name="creation_time" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Page Creation Time"/>
+        <column xsi:type="timestamp" name="update_time" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Page Modification Time"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="post_id"/>
         </constraint>
-        <index referenceId="BLOGPOST_POST_IDENTIFIER" indexType="btree">
-            <column name="identifier"/>
+        <index referenceId="BLOGPOST_POST_URI" indexType="btree">
+            <column name="uri"/>
         </index>
         <index referenceId="BLOGPOST_POST_TITLE_META_KEYWORDS_META_DESCRIPTION_IDENTIFIER_CONTENT" indexType="fulltext">
             <column name="title"/>
-            <column name="meta_keywords"/>
-            <column name="meta_description"/>
-            <column name="identifier"/>
+            <column name="uri"/>
             <column name="content"/>
             <column name="sort_description"/>
             <column name="tags"/>
